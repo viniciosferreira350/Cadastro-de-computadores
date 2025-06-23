@@ -1,0 +1,152 @@
+LTP - Especificação Trabalho em Grupo
+
+Fazer um algorítimo para controlar o número de faltas dos empregados de uma Empresa, descontando nos respectivos salários valores relativos ao número de faltas de cada um.
+CIÊNCIA DA COMPUTAÇÃO
+LTP
+
+Trabalho: 18 pts
+Prof. Air Rabelo
+
+CADASTRO E VENDA DE COMPUTADORES
+
+PARA ENTREGA DO TRABALHO OBSERVAR AS INSTRUÇÕES ABAIXO:
+1 – Criar um projeto no Eclipse com o nome dos integrantes do grupo.
+
+Exemplo:
+→ Nomes dos integrantes: Marcelo, Silvia, Pedro e Paula
+→ Nome do projeto: MarceloSilviaPedroPaula
+
+2 – Criar dentro do projeto um arquivo texto de nome grupo.txt e dentro dele coloque o nome completo de cada integrante.
+
+3 – Após o término, compactar a pasta do projeto criado no Eclipse (contendo inclusive o arquivo de dados COMPUTADOR.DAT com os dados inseridos nele para teste) e gerar um arquivo compactado com o mesmo nome do projeto.
+
+Exemplo:
+MarceloSilviaPedroPaula.zip
+
+5 – Entregar o arquivo compactado pela área do aluno.
+
+OBSERVAÇÕES:
+1 – Somente 1 integrante do grupo deverá entregar o arquivo compactado no TEAMS.
+2 – Não serão aceitas cópias de trabalhos entre os grupos. Em caso de trabalhos copiados todos os integrantes dos grupos envolvidos ficarão com nota zero.
+3 – NÃO SERÃO ACEITOS PROJETOS CONTENDO ERROS DE SINTAXE!!
+4 – Compacte seu projeto utilizando um software que gere arquivos .ZIP
+
+ESPECIFICAÇÃO DO TRABALHO
+
+Escreva um Sistema em Java para manter um arquivo de dados com informações sobre Computadores e das Vendas para um revendedor chamado Loja de Computadores Ltda.
+
+Deverá existir um programa principal de nome Main.java contendo um Menu de Opções por onde o usuário escolherá entre as opções de:
+
+INCLUSÃO DE COMPUTADOR
+ALTERAÇÃO DE COMPUTADOR
+EXCLUSÃO DE COMPUTADOR
+RELATÓRIOS
+Todas estas operações deverão ser programadas por meio de métodos contidos na classe Computador.java.
+
+Variáveis da classe Computador utilizadas para ler/gravar no Arquivo de Dados:
+Nome da variável	Tipo	Descrição
+ativo	char	deverá conter ‘N’ para registro excluído e ‘S’ para registro corrente
+codComp (chave)	String	Código do computador (digitação obrigatória)
+marca	String	Nome do fabricante (consistir por meio do método consistirMarca)
+modelo	String	Descrição do modelo do computador (digitação obrigatória)
+processador	String	Modelo do processador (consistir com método consistirProcessador)
+quantMemoria	int	Quantidade de memória RAM em GB (aceitar valores entre 1 e 32)
+tamanhoTela	int	Tamanho em Polegadas da tela (consistir com método consistirTamanhoTela)
+quantEstoque	int	Quantidade disponível no estoque da empresa (aceitar valor acima de zero)
+preco	float	Preço de venda (aceitar somente valores entre R$1.000,00 e R$20.000,00)
+quantTotalVendida	int	Quantidade de computadores já vendidos até o momento. Inicializar com zero. Não pode ser digitado pelo usuário nem na inclusão nem na alteração
+quantUltimaVenda	int	Quantidade de computadores vendidos na última venda registrada. Na inclusão, inicializar com zero. Só deve ser digitado na alteração (válido acima de zero e menor ou igual ao quantEstoque)
+dtUltimaVenda	String	Data da última venda (DD/MM/AAAA). Na inclusão, iniciar vazio. Só deve ser digitado na alteração (consistido por um método para validar a data como uma data possível)
+
+Na classe Main.java deverão ser declarados 3 vetores globais contendo:
+
+Marcas disponíveis
+Processadores disponíveis
+Tamanhos de Telas disponíveis
+Valores iniciais:
+
+Marcas	Processadores	Tamanhos Telas (polegadas)
+Dell	Intel Core Ultra 3	10
+Lenovo	Intel Core Ultra 5	12
+HP	Intel Core Ultra 7	15
+Positivo	Intel Core Ultra 9	20
+Asus	AMD Ryzen 5	25
+Apple	AMD Ryzen 7	28
+IBM	AMD Ryzen 9	
+
+Métodos de Consistência:
+Método consistirMarca:
+
+Verifica se a marca digitada existe no vetor de marcas. Retorna TRUE se existir, senão FALSE.
+
+Método consistirProcessador:
+
+Verifica se o processador digitado existe no vetor de processadores. Retorna TRUE se existir, senão FALSE.
+
+Método consistirTamanhoTela:
+
+Verifica se o tamanho da tela digitado existe no vetor de tamanhos. Retorna TRUE se existir, senão FALSE.
+
+RELATÓRIO DE VENDAS:
+
+Sub-opções:
+
+Listar todos os Computadores
+Listar apenas um Computador através do codComp informado
+Listar somente Computadores já vendidos (quantTotalVendida > 0)
+Listar Computadores cuja última venda ocorreu em determinado ano (solicitar o ano)
+Listar Computadores por faixa de preço (solicitar preço mínimo e máximo)
+Listar Computadores cujo preço do estoque ultrapasse R$50.000,00 (estoque × preço)
+Campos do Relatório:
+yaml
+Copiar código
+CODCOMP  MARCA    MODELO   PROCESSADOR   ESTOQUE  PRECO  QUANT VEND  DT ULT VENDA  VLR VENDA
+XXXXXX   XXXXXXX  XXXXXX   XXXXXXXXXX     999      999,99   999       DD/MM/AAAA    9999,99
+XXXXXX   XXXXXXX  XXXXXX   XXXXXXXXXX     999      999,99   999       DD/MM/AAAA    9999,99
+...
+TOTAIS:                                                                  9999          99999,99
+VLR VENDA = PRECO × QUANT TOTAL VENDIDA
+A linha "TOTAIS" indica a soma de todas as unidades vendidas e o total faturado.
+REGISTRAR A VENDA DE COMPUTADOR:
+
+Escolher ALTERAÇÃO DE COMPUTADOR no menu.
+Informar o codComp a ser vendido.
+O programa exibe todas as informações do registro.
+O usuário altera os campos:
+Quantidade da Última Venda (quantUltimaVenda)
+Data da Última Venda (dtUltimaVenda)
+Regras para quantidade da última venda:
+
+Deve ser maior que zero e menor ou igual ao quantEstoque.
+Após a confirmação:
+
+Somar quantUltimaVenda ao campo quantTotalVendida
+Subtrair quantUltimaVenda do campo quantEstoque
+Gravar o registro alterado no arquivo
+OBSERVAÇÕES GERAIS:
+1 – Na inclusão:
+Não pode haver dois registros com o mesmo codComp, exceto se um deles estiver excluído (ativo = 'N'). Caso contrário:
+"COMPUTADOR JÁ CADASTRADO!"
+
+2 – Na inclusão:
+Os campos quantTotalVendida, quantUltimaVenda e dtUltimaVenda não devem ser digitados nem apresentados.
+
+3 – Na alteração:
+O campo quantTotalVendida não poderá ser digitado, apenas exibido. Os demais campos (exceto codComp e quantTotalVendida) podem ser alterados.
+
+4 – Consistências obrigatórias na Inclusão / Alteração:
+
+Campo	Regras
+marca	consistir via método consistirMarca
+modelo	digitação obrigatória
+processador	consistir via método consistirProcessador
+quantMemoria	aceitar valores entre 1 e 32 (GB)
+tamanhoTela	consistir via método consistirTamanhoTela
+quantEstoque	aceitar valor acima de zero
+preco	aceitar entre R$1.000,00 e R$20.000,00
+quantTotalVendida	não será digitado na inclusão nem alteração
+quantUltimaVenda	só digitado na alteração, menor ou igual a quantEstoque
+dtUltimaVenda	só digitado na alteração, data válida
+
+5 – O campo ativo deve receber o valor 'N' no módulo de exclusão.
+
